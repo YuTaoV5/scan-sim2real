@@ -1,0 +1,12 @@
+{
+  "reviewed": false,
+  "robot": "Go2 EDU",
+  "initial_base_height_m": null,
+  "T_base_lidar": null,
+  "T_imu_lidar": [[1,0,0,-0.011],[0,1,0,-0.02329],[0,0,1,0.04412],[0,0,0,1]],
+  "T_imu_lidar_source": "MID360 manual nominal internal geometry; validate stream axes and driver extrinsics",
+  "mounting_angle_deg": null,
+  "lidar_ip": null,
+  "host_lidar_ip": null,
+  "sdk_interface": null
+}

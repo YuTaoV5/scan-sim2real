@@ -1,0 +1,19 @@
+Generated: X:\Items\data_fusion\.publish\scan-sim2real\generated\test-tmp\tmpejknvfwp\out\scan_go2edu.launch ; LIO root_rob2nav.yaml. No SDK or robot connection made.
+test_duplicate_time (test_imu_checks.Check.test_duplicate_time) ... ok
+test_floor (test_imu_checks.Check.test_floor) ... ok
+test_motion_rejected (test_imu_checks.Check.test_motion_rejected) ... ok
+test_six_pose_bias (test_imu_checks.Check.test_six_pose_bias) ... ok
+test_six_pose_degenerate (test_imu_checks.Check.test_six_pose_degenerate) ... ok
+test_tilt_and_bias (test_imu_checks.Check.test_tilt_and_bias) ... ok
+test_wrong_units (test_imu_checks.Check.test_wrong_units) ... ok
+test_cloud_height_shift_preserves_other_fields_and_padding (test_prepare.PrepareTests.test_cloud_height_shift_preserves_other_fields_and_padding) ... ok
+test_measured_inverse_and_world_cloud_launch (test_prepare.PrepareTests.test_measured_inverse_and_world_cloud_launch) ... ok
+test_mode2_requires_real_waypoints_before_mutating_source (test_prepare.PrepareTests.test_mode2_requires_real_waypoints_before_mutating_source) ... ok
+test_nonfinite_rejected (test_prepare.PrepareTests.test_nonfinite_rejected) ... ok
+test_reflection_rejected (test_prepare.PrepareTests.test_reflection_rejected) ... ok
+test_unknown_template_rejected (test_prepare.PrepareTests.test_unknown_template_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.225s
+
+OK

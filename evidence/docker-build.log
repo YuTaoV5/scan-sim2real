@@ -1,0 +1,15 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            BuildKit is currently disabled; enable it by removing the DOCKER_BUILDKIT=0
+            environment-variable.
+
+Sending build context to Docker daemon  41.47kB
+
+Step 1/5 : FROM ros:noetic-ros-base-focal
+ ---> 607ca0f02048
+Step 2/5 : ENV DEBIAN_FRONTEND=noninteractive
+ ---> Running in b4db28791c48
+ ---> Removed intermediate container b4db28791c48
+ ---> c3d04e9f4250
+Step 3/5 : RUN apt-get update && apt-get install -y --no-install-recommends     ros-noetic-rviz ros-noetic-tf ros-noetic-tf2-ros ros-noetic-pcl-ros     ros-noetic-pcl-conversions ros-noetic-robot-state-publisher     ros-noetic-xacro ros-noetic-message-generation ros-noetic-cv-bridge     ros-noetic-image-transport ros-noetic-message-filters     python3-numpy python3-yaml python3-scipy python3-catkin-tools     build-essential cmake git libeigen3-dev libopencv-dev libyaml-cpp-dev     libtbb-dev qtbase5-dev nlohmann-json3-dev libarmadillo-dev     libgl1-mesa-dri libgl1-mesa-glx mesa-utils     && rm -rf /var/lib/apt/lists/*
+ ---> Running in f2fe49a89f2c
+failed to create default sandbox: operation not permitted

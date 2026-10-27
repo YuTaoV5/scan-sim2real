@@ -1,0 +1,29 @@
+# Design metadata; NOT directly accepted by SCAN's rosparam loader.
+schema: scan_go2_route_design_v1
+ready_for_execution: false
+localization_frame: null
+controller: rob2nav_walk_moe
+geometry:
+  stair_risers: 4
+  riser_height_m: 0.16
+  tread_depth_m: 0.30
+  stair_width_m: 1.20
+  nominal_total_rise_m: 0.64
+  landing_length_m: null
+  ramp_horizontal_run_m: null
+  ramp_width_m: null
+  ramp_returns_to_ground: true
+  measured_base_height_m: null
+route_stages:
+  - approach_and_align
+  - stair_ascent_centerline
+  - crest_and_support_transition
+  - ramp_descent_centerline
+  - flat_exit_and_stop
+# Configure after measurement and MoE course validation, never assume default speed is qualified.
+limits:
+  validated_ascent_speed_m_s: null
+  validated_descent_speed_m_s: null
+  maximum_lateral_error_m: null
+  minimum_edge_clearance_m: null
+body_reference_waypoints_world_xyz: null

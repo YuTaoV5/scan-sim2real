@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-27",
+  "installation_stopped_at_user_request": true,
+  "docker_binary_version": "29.9.2",
+  "docker_daemon_stopped": true,
+  "temporary_images_removed": true,
+  "noetic_image_download_verified": true,
+  "noetic_manifest_digest": "sha256:72b8bc59035dc0a5b8e07aae28c16caa84192971d72d207c72ed734fb1d5e97d",
+  "rviz_in_container_started": false,
+  "navigation_compiled_in_container": false,
+  "physical_sensor_data_available": false,
+  "measured_mounting_transform_available": false,
+  "numerical_tests_passed": 7,
+  "python_syntax_check_passed": true,
+  "sdk_or_actuator_started": false,
+  "blockers": ["host network namespace permission", "read-only cgroup", "rootless TUN device unavailable"],
+  "rejected_action_not_executed": "create /dev/net/tun and chmod 666"
+}

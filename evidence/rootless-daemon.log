@@ -1,0 +1,4 @@
+time="2026-10-27T23:52:43+08:00" level=warning msg="specifying --disable-host-loopback is highly recommended to prohibit connecting to 127.0.0.1:* on the host namespace (requires slirp4netns or VPNKit)"
+open: No such file or directory
+[rootlesskit:parent] error: failed to setup network &{logWriter:0xc000031eb0 binary:slirp4netns mtu:65520 ipnet:<nil> disableHostLoopback:false apiSocketPath: enableSandbox:false enableSeccomp:false enableIPv6:false ifname:tap0 infoMu:{w:{state:0 sema:0} writerSem:0 readerSem:0 readerCount:{_:{} v:0} readerWait:{_:{} v:0}} info:<nil>}: setting up tap tap0: executing [[nsenter -t 19403 -n -m -U --preserve-credentials ip tuntap add name tap0 mode tap] [nsenter -t 19403 -n -m -U --preserve-credentials ip link set tap0 up]]: exit status 1
+[rootlesskit:child ] error: parsing message from fd 3: EOF

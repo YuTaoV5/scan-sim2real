@@ -1,0 +1,3 @@
+# ROS Noetic Python 3.8 的离线数值工具版本；ROS Python 包使用 apt，不用 pip 覆盖。
+numpy==1.24.4
+PyYAML==6.0.2

@@ -1,0 +1,9 @@
+.git
+sources
+workspaces
+data
+generated
+runtime
+logs
+__pycache__
+.venv

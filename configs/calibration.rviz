@@ -1,0 +1,44 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 35; 35; 40
+    Fixed Frame: livox_frame
+    Frame Rate: 20
+  Displays:
+    - Class: rviz/Grid
+      Name: Reference grid (not measured ground)
+      Enabled: true
+      Cell Size: 0.5
+      Plane Cell Count: 20
+    - Class: rviz/Axes
+      Name: Raw lidar axes
+      Enabled: true
+      Length: 0.5
+      Radius: 0.02
+      Reference Frame: <Fixed Frame>
+    - Class: rviz/PointCloud2
+      Name: Raw MID360
+      Enabled: true
+      Topic: /calibration/cloud
+      Queue Size: 2
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: AxisColor
+      Axis: Z
+    - Class: rviz/Marker
+      Name: IMU measured up vector
+      Enabled: true
+      Marker Topic: /calibration/gravity
+      Queue Size: 2
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 6
+      Pitch: 0.6
+      Yaw: 0.7
+Window Geometry:
+  Width: 1280
+  Height: 800

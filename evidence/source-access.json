@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-28",
+  "method": "GitHub git/commits metadata and model blob identity; not full source checkout/build",
+  "repositories": [
+    {
+      "name": "scan",
+      "commit": "348e8a590a50a5a6bbab8d8c6dcfd171f009be26",
+      "status": "verified",
+      "url": "https://api.github.com/repos/wuyi2121/SCAN-Planner/git/commits/348e8a590a50a5a6bbab8d8c6dcfd171f009be26"
+    },
+    {
+      "name": "lio",
+      "commit": "1d79af77f3d9747ea57ef52a9b01d326a8ec561a",
+      "status": "verified",
+      "url": "https://api.github.com/repos/xiaofan4122/Elevator-LIO/git/commits/1d79af77f3d9747ea57ef52a9b01d326a8ec561a"
+    },
+    {
+      "name": "livox_sdk",
+      "commit": "c0796f04c143143899c87a773d9f6b7136453c0b",
+      "status": "verified",
+      "url": "https://api.github.com/repos/Livox-SDK/Livox-SDK2/git/commits/c0796f04c143143899c87a773d9f6b7136453c0b"
+    },
+    {
+      "name": "livox_driver",
+      "commit": "21445540f0d100dc86a7e6df312dd70bbdb4afdf",
+      "status": "verified",
+      "url": "https://api.github.com/repos/Livox-SDK/livox_ros_driver2/git/commits/21445540f0d100dc86a7e6df312dd70bbdb4afdf"
+    },
+    {
+      "name": "rob2nav",
+      "commit": "3187a41400364f18e0d9788ea52b06c4bc02126a",
+      "status": "verified",
+      "url": "https://api.github.com/repos/YuTaoV5/Rob2Nav/git/commits/3187a41400364f18e0d9788ea52b06c4bc02126a"
+    },
+    {
+      "name": "unitree_sdk2_python",
+      "commit": "814556d15970dd2ecf1c9984e845ca02ab07e206",
+      "status": "verified",
+      "url": "https://api.github.com/repos/unitreerobotics/unitree_sdk2_python/git/commits/814556d15970dd2ecf1c9984e845ca02ab07e206"
+    }
+  ],
+  "model": {
+    "method": "Public GitHub blob SHA1/size matched against local pinned Git object; SHA256 recomputed locally",
+    "url": "https://api.github.com/repos/YuTaoV5/Rob2Nav/contents/vendor/RoboGauge/resources/models/go2/go2_moe_cts_137k_0.6739.pt?ref=3187a41400364f18e0d9788ea52b06c4bc02126a",
+    "bytes": 5206984,
+    "git_blob_sha1": "dfc337fdba3c8a5e892041aaa0a5967755df4964",
+    "sha256": "2206659a6a23886446dcfc05d86888d6cdc9b8a4e31f44cbbc4e2d17ba3d6ead",
+    "status": "verified"
+  }
+}

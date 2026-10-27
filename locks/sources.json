@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "reviewed_on": "2026-10-28",
+  "repositories": [
+    {
+      "name": "scan",
+      "url": "https://github.com/wuyi2121/SCAN-Planner.git",
+      "commit": "348e8a590a50a5a6bbab8d8c6dcfd171f009be26",
+      "default": true
+    },
+    {
+      "name": "lio",
+      "url": "https://github.com/xiaofan4122/Elevator-LIO.git",
+      "commit": "1d79af77f3d9747ea57ef52a9b01d326a8ec561a",
+      "default": true
+    },
+    {
+      "name": "livox_sdk",
+      "url": "https://github.com/Livox-SDK/Livox-SDK2.git",
+      "commit": "c0796f04c143143899c87a773d9f6b7136453c0b",
+      "default": true
+    },
+    {
+      "name": "livox_driver",
+      "url": "https://github.com/Livox-SDK/livox_ros_driver2.git",
+      "commit": "21445540f0d100dc86a7e6df312dd70bbdb4afdf",
+      "default": true
+    },
+    {
+      "name": "rob2nav",
+      "url": "https://github.com/YuTaoV5/Rob2Nav.git",
+      "commit": "3187a41400364f18e0d9788ea52b06c4bc02126a",
+      "default": false,
+      "sparse_directories": [
+        "rob2nav",
+        "deployment",
+        "vendor/RoboGauge",
+        "docs",
+        "scripts"
+      ]
+    },
+    {
+      "name": "unitree_sdk2_python",
+      "url": "https://github.com/unitreerobotics/unitree_sdk2_python.git",
+      "commit": "814556d15970dd2ecf1c9984e845ca02ab07e206",
+      "default": false
+    }
+  ],
+  "model": {
+    "repository": "rob2nav",
+    "path": "vendor/RoboGauge/resources/models/go2/go2_moe_cts_137k_0.6739.pt",
+    "sha256": "2206659a6a23886446dcfc05d86888d6cdc9b8a4e31f44cbbc4e2d17ba3d6ead",
+    "observation_dim": 45,
+    "policy_hz": 50,
+    "hardware_qualified": false
+  }
+}

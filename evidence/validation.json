@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-28",
+  "scope": "offline handoff repository checks",
+  "real_data_available": false,
+  "hardware_tested": false,
+  "ros_runtime_tested": false,
+  "docker_image_build": "not_verified_on_new_server",
+  "rviz_rendering": "not_verified",
+  "navigation_build": "not_verified",
+  "synthetic_ros_fixture": "implemented_not_run",
+  "offline_tests": {
+    "status": "passed",
+    "count": 13,
+    "command": "python -m unittest discover -s tests -v"
+  },
+  "bundle_checks": "passed",
+  "shell_syntax": {
+    "status": "passed",
+    "tool": "Git Bash bash -n",
+    "command": "for f in scripts/*.sh; do bash -n \"$f\"; done"
+  },
+  "remaining": [
+    "new server Docker preflight and image build",
+    "native navigation compile and RViz rendering",
+    "real MID360 bags and measured mounting transform",
+    "ROS to existing MoE runtime command adapter and stopping validation",
+    "physical 16cm stairs / crest / descent testing",
+    "route supervision, edge constraints and multi-floor topology"
+  ],
+  "environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "python": "3.13.2",
+    "numpy": "2.4.2",
+    "PyYAML": "6.0.3"
+  },
+  "source_fetch_all": "not_run_on_new_server"
+}
