@@ -49,3 +49,5 @@ python scripts/fetch_sources.py --with-rob2nav --with-unitree-sdk
 ## 语音与统一导航任务
 
 新增 [09 语音、地图与技能状态机](docs/09-voice-control.md) 和 [10 服务器部署与验收](docs/10-server-acceptance.md)。支持常驻 ASR/TTS、地图地点与别名、三维拓扑路线、ROS1 SCAN 桥及原 Rob2Nav 技能合同。`demo` 使用合成任务反馈；`live` 保留设备资格与唯一控制写入者，现场验证状态见 [语音证据](evidence/voice-validation.json)。
+
+MID360原厂安装与作者头部套件不同的参数对照、仿真45°/90°模型限制及实机更新步骤，见 [11 安装源码审计](docs/11-mid360-mounting.md)。
