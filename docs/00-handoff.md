@@ -52,3 +52,5 @@
 语音实现与部署入口见文档09/10；能力集成到 Rob2Nav 的 `codex/voice-agent-capabilities` 分支。当前已实现三维地点图与任务状态机、ROS桥和原运行时worker，但“实现”不代替ROS/实机验收。最新真实推理与测试范围见 evidence/voice-validation.json；此文件比上文旧的未完成清单更具体。多层地图自动切换与地形可达性仍未实现。
 
 2026-10-28 用户确认：5090及Go2位于其局域网，agent不可连接，由用户部署。后续不要索要该服务器SSH或将其视为流程阻塞；按文档10在已授权服务器验证软件，再交付现场复现步骤。ROS/实机通过仍需现场证据。
+
+安装相关完整复核见文档12与configs/mounting-change-checklist.json，共34项；evidence/mounting-source-audit.json仅证明固定源码身份/定位，不证明仿真补丁或实机通过。后续优先现场完成必填项；CPU/GPU渲染器的7项改造仍需实施、编译和回归。

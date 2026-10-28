@@ -12,9 +12,11 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     required=['README.md','AGENTS.md','LICENSE','THIRD_PARTY_NOTICES.md','locks/sources.json',
               'evidence/validation.json','evidence/source-access.json','configs/calibration.template.json','configs/mission.template.yaml',
-              'configs/calibration.rviz','voice_agent/server.py','locks/voice-models.json','evidence/voice-validation.json','docker/Dockerfile','.github/workflows/offline-checks.yml']
+              'configs/calibration.rviz','voice_agent/server.py','locks/voice-models.json','evidence/voice-validation.json','docker/Dockerfile','.github/workflows/offline-checks.yml',
+              'configs/mounting-change-checklist.json','scripts/audit_mounting.py','evidence/mounting-source-audit.json']
     required += ['docs/'+n for n in ['00-handoff.md','01-new-server.md','02-calibration.md',
-                  '03-bag-pcd.md','04-lio-scan.md','05-moe.md','06-missions.md','07-sources.md','08-troubleshooting.md','09-voice-control.md','10-server-acceptance.md']]
+                  '03-bag-pcd.md','04-lio-scan.md','05-moe.md','06-missions.md','07-sources.md','08-troubleshooting.md','09-voice-control.md','10-server-acceptance.md',
+                  '11-mid360-mounting.md','12-complete-mounting-changes.md']]
     for path in required:
         if not (ROOT/path).is_file():raise ValueError('Missing '+path)
     lock=json.loads((ROOT/'locks/sources.json').read_text())
@@ -35,6 +37,22 @@ def main():
     state=json.loads((ROOT/'evidence/validation.json').read_text())
     if state['real_data_available'] or state['hardware_tested'] or state['ros_runtime_tested']:
         raise ValueError('Update verifier when real evidence exists; current bundle has no runtime evidence')
+    inventory=json.loads((ROOT/'configs/mounting-change-checklist.json').read_text(encoding='utf-8'))
+    mounting=json.loads((ROOT/'evidence/mounting-source-audit.json').read_text(encoding='utf-8'))
+    ids=[row['id'] for row in inventory['changes']]
+    if inventory['real_mounting_values_known'] or len(ids)!=len(set(ids)):
+        raise ValueError('Mounting inventory invented measurements or duplicate IDs')
+    if [row['id'] for row in mounting['changes']]!=ids or not mounting['source_audit_passed']:
+        raise ValueError('Mounting source audit is incomplete')
+    if any(mounting[key] for key in ('calibration_known','hardware_tested','ros_runtime_tested','upstream_patches_applied')):
+        raise ValueError('Source locations cannot certify physical mounting or unapplied patches')
+    pins={entry['name']:entry['commit'] for entry in lock['repositories']}
+    if any(commit!=pins[name] for name,commit in mounting['commits'].items()):
+        raise ValueError('Mounting source audit version differs from source lock')
+    for item in mounting['files']:
+        if not re.fullmatch('[0-9a-f]{64}',item['sha256']):raise ValueError('Invalid audit hash')
+        if item['repository']!='bundle' and item['pinned_blob_verified'] is not True:
+            raise ValueError('Unverified upstream mounting source')
     files=[p for folder in ['scripts','tests','docs','references','configs','locks','evidence','voice_agent']
            for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
     files += [ROOT/n for n in ['README.md','AGENTS.md','LICENSE','THIRD_PARTY_NOTICES.md']]

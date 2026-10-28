@@ -1,0 +1,733 @@
+{
+  "schema": 1,
+  "scope": "source identity and change-point locations only",
+  "identity_method": "GitHub API contents at pinned commits, blob SHA1 independently recomputed",
+  "commits": {
+    "scan": "348e8a590a50a5a6bbab8d8c6dcfd171f009be26",
+    "lio": "1d79af77f3d9747ea57ef52a9b01d326a8ec561a",
+    "livox_driver": "21445540f0d100dc86a7e6df312dd70bbdb4afdf"
+  },
+  "calibration_known": false,
+  "ros_runtime_tested": false,
+  "hardware_tested": false,
+  "upstream_patches_applied": false,
+  "files": [
+    {
+      "repository": "bundle",
+      "path": "configs/calibration.template.json",
+      "sha256": "ecd0ec442eb58b7da5f61091ee51ba53a3c11a33a4995c8ef83a7ba986ad4e35",
+      "git_blob_sha1": "2a5237e26101f46099ae8f70f3ca9763ba65da5b",
+      "pinned_blob_verified": null
+    },
+    {
+      "repository": "bundle",
+      "path": "scripts/prepare.py",
+      "sha256": "d3006fc1a76db0301727e06985c30d933ca3aa2c270ebcb58b37e520b246c565",
+      "git_blob_sha1": "582319811288923fd663f4fd6b5bff881d28f7c0",
+      "pinned_blob_verified": null
+    },
+    {
+      "repository": "lio",
+      "path": "yaml/sensors/livox.yaml",
+      "sha256": "e4c76c260a24043a849b06142f3d044a40446b548deeab6daa3eabea81205fcb",
+      "git_blob_sha1": "e4a946801697a136883ef7e44b719f7d6248b928",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "livox_driver",
+      "path": "config/MID360_config.json",
+      "sha256": "6eba01156ce604a5a5aab8b102179d21ba0729aa4652cd9b0d2ad2a6afd7ca4d",
+      "git_blob_sha1": "e3df5d17114f38b8f8170ebc43ab7ca75d8c1015",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "bundle",
+      "path": "scripts/livox_relay.py",
+      "sha256": "09badd9f342b61d022450da1ed0392951830638b740463a23804b2656b6370fd",
+      "git_blob_sha1": "3b3157e79cf33fdfa70013c607c5c27cda177f4d",
+      "pinned_blob_verified": null
+    },
+    {
+      "repository": "lio",
+      "path": "yaml/runtime/mapping.yaml",
+      "sha256": "409526a9f43ec263b832d4c3a840fe504a860f9161d70c2a88b7e089d20c0dae",
+      "git_blob_sha1": "f5365215c399f1dbbbb10bde6ace12795de9c422",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "lio",
+      "path": "src/node/publish.cpp",
+      "sha256": "f8163be91f78b3e62ac29ec1463b846e0e3466e232886d236bedfa2fcc1f09d4",
+      "git_blob_sha1": "8ad36fb432c2282a4c478eb73375acc56453df38",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "bundle",
+      "path": "scripts/pose_adapter.py",
+      "sha256": "ce0b552aff8c64a2513f12aee5a35bbe7efee1e3dd32108228db77677ca19456",
+      "git_blob_sha1": "956bb1fc1e78a855469c9335eb101485d3d8952f",
+      "pinned_blob_verified": null
+    },
+    {
+      "repository": "scan",
+      "path": "src/planner/plan_manage/launch/run.launch",
+      "sha256": "4a8f69a82465acc9617a2a88e58fcc6e3fc21247de36d361057776c72a550013",
+      "git_blob_sha1": "4d964c84a557a527cc0913abde4b2a9d6c8cbcda",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/planner/plan_env/src/grid_map.cpp",
+      "sha256": "14bc11a3b3ea7618043db6f84133e3af2dd1d117f3affc8ebcbc7a816f5053a4",
+      "git_blob_sha1": "b71bf227ec3c58608bcc50b3fbd6ddd91ebcdf2f",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/planner/plan_env/include/plan_env/grid_map.h",
+      "sha256": "d42c11b6f3c7896e7d386c3c5434f23bbd913cb9224fb484256e370e4d73ebd8",
+      "git_blob_sha1": "817b090c12a1c141aa56265371b808d09431d3ba",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/planner/plan_manage/launch/advanced_param.xml",
+      "sha256": "b313652cf4b09280577cadeb2dfdf86fb72ec7a849ca811a36cb036928c1ca1d",
+      "git_blob_sha1": "bd71025a0c447e6f4a7bd46ce21e6a4305a0e5b4",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+      "sha256": "cd384a6d9503767ba9c880a6b6f33d5a583d0fe78c0a3d6df8299b51c0e490f2",
+      "git_blob_sha1": "264672863773f36965a5a422ff7c8fd5b9022011",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "bundle",
+      "path": "configs/calibration.rviz",
+      "sha256": "93c3f3ee7be35db516ea07467d9f8ddc0bb99016f7333819aa328820e900bb49",
+      "git_blob_sha1": "cecd9b218ef4bf3ba78af5fde8bc4d5910041e56",
+      "pinned_blob_verified": null
+    },
+    {
+      "repository": "scan",
+      "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+      "sha256": "c91f98f41edeee787f7bf21da0fbb879435358838fbec1ed3e8f9322e76ea24a",
+      "git_blob_sha1": "933de77f45141deec7daf1689690a1a05598b59e",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/simulator/local_sensing/src/opengl_render_node.cpp",
+      "sha256": "86114e28235104dd28d8c8a819c117b256377c03b2e04a226091e3c5f3f45fe0",
+      "git_blob_sha1": "d85bc19c524f1691db6c937aa9cc5d1bacb60e33",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/simulator/local_sensing/include/opengl_sim.hpp",
+      "sha256": "d2c4df3a228d67657b7fab480d110746a04533c255b4e8ec31b69ad7fcd2142b",
+      "git_blob_sha1": "fac34f22356d74716521b10ac6828ac37264eb40",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/simulator/local_sensing/include/360camera.vs",
+      "sha256": "608348925315e961a0d5734c32cbbad5e7b549bae9afaf76ef1041444d0f08c7",
+      "git_blob_sha1": "4d2896d4849ce9cce966d5666950e1bfa28a8a97",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/simulator/local_sensing/include/camera.fs",
+      "sha256": "9a30af1f820fa96cb321299baf733ea982881c7bae9b2df707eea0dd56d826c0",
+      "git_blob_sha1": "fadda1860b43c7527b6fd1c8e437b1caa6b91126",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/planner/plan_manage/launch/simulator.xml",
+      "sha256": "a7e046a0c23553ab8c0af4bbf72d03cb84e9605905a67a7283c34a18dc2420b8",
+      "git_blob_sha1": "1f4e6a2398a89bf52ccb611278f4e519deff9b95",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "scan",
+      "path": "src/simulator/Utils/go2_description/urdf/go2_description.urdf",
+      "sha256": "7d19fe48e2e689ee1a032ab99f2a4a8b671d87e73de48d3e65811682a5b48b9e",
+      "git_blob_sha1": "70bce96b3e96a1c4cf5eeb1753bbd4351c9122e4",
+      "pinned_blob_verified": true
+    },
+    {
+      "repository": "bundle",
+      "path": "scripts/init_voice_map.py",
+      "sha256": "3b478fce90d5dcc6bcf37d9ed95f864dbd1fb8ef66b33b4d88c7af9570064535",
+      "git_blob_sha1": "b4cf9ffb73d7f4ec1921e53c3e3acb1eba0d71fc",
+      "pinned_blob_verified": null
+    },
+    {
+      "repository": "bundle",
+      "path": "voice_agent/runtime_worker.py",
+      "sha256": "b4ed633f8dde1dff4478d0ea7995a7c81325d3c17ee2e95650d467803bb613c7",
+      "git_blob_sha1": "7009118678f84145c8efbd5b76e3624fceb161d3",
+      "pinned_blob_verified": null
+    }
+  ],
+  "changes": [
+    {
+      "id": "M01",
+      "scope": "live",
+      "title": "机身与雷达原点/六自由度",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "configs/calibration.template.json",
+          "lines": [
+            5
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M02",
+      "scope": "live",
+      "title": "安装矩阵求逆",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "scripts/prepare.py",
+          "lines": [
+            56
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M03",
+      "scope": "live",
+      "title": "MID360内部IMU外参",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "lio",
+          "path": "yaml/sensors/livox.yaml",
+          "lines": [
+            5
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M04",
+      "scope": "live",
+      "title": "驱动网络与唯一数据流",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "livox_driver",
+          "path": "config/MID360_config.json",
+          "lines": [
+            13
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M05",
+      "scope": "live",
+      "title": "驱动不预变换原始点云",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "livox_driver",
+          "path": "config/MID360_config.json",
+          "lines": [
+            31
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M06",
+      "scope": "live",
+      "title": "CustomMsg类型适配",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "scripts/livox_relay.py",
+          "lines": [
+            4,
+            5
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M07",
+      "scope": "live",
+      "title": "近场球形盲区",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "lio",
+          "path": "yaml/runtime/mapping.yaml",
+          "lines": [
+            3
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M08",
+      "scope": "live",
+      "title": "自身遮挡盒坐标与运动包络",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "lio",
+          "path": "yaml/runtime/mapping.yaml",
+          "lines": [
+            4
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M09",
+      "scope": "live",
+      "title": "降采样保真",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "lio",
+          "path": "yaml/runtime/mapping.yaml",
+          "lines": [
+            16
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M10",
+      "scope": "live",
+      "title": "真实机身位姿链",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "lio",
+          "path": "src/node/publish.cpp",
+          "lines": [
+            95
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M11",
+      "scope": "live",
+      "title": "LIO世界系点云",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "lio",
+          "path": "src/node/publish.cpp",
+          "lines": [
+            128,
+            195
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M12",
+      "scope": "live",
+      "title": "独立雷达位姿",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "scripts/pose_adapter.py",
+          "lines": [
+            29
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M13",
+      "scope": "live",
+      "title": "SCAN实机输入重映射",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "scripts/prepare.py",
+          "lines": [
+            75
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M14",
+      "scope": "live",
+      "title": "世界系云开关",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/run.launch",
+          "lines": [
+            26
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M15",
+      "scope": "live",
+      "title": "硬编码内部外参绕过",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_env/src/grid_map.cpp",
+          "lines": [
+            57
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M16",
+      "scope": "live",
+      "title": "直接body pose接SCAN的可选路线",
+      "implementation_status": "conditional_upstream_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_env/include/plan_env/grid_map.h",
+          "lines": [
+            91
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M17",
+      "scope": "both",
+      "title": "机身高度与世界原点",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/advanced_param.xml",
+          "lines": [
+            50
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M18",
+      "scope": "both",
+      "title": "双圆柱碰撞体与检查函数",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_env/include/plan_env/grid_map.h",
+          "lines": [
+            367
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M19",
+      "scope": "both",
+      "title": "垂直碰撞膨胀及显示一致性",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+          "lines": [
+            49,
+            488
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M20",
+      "scope": "live",
+      "title": "真实模式不发布仿真关节/位姿",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/run.launch",
+          "lines": [
+            53
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M21",
+      "scope": "live",
+      "title": "TF和RViz",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "configs/calibration.rviz",
+          "lines": [
+            8
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M22",
+      "scope": "simulation",
+      "title": "CPU发布的雷达安装变换",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+          "lines": [
+            212
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M23",
+      "scope": "simulation",
+      "title": "CPU射线与筛选原点",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+          "lines": [
+            1006
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M24",
+      "scope": "simulation",
+      "title": "CPU非对称垂直视场",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+          "lines": [
+            1086,
+            1088
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M25",
+      "scope": "simulation",
+      "title": "GPU节点杆臂与近裁剪",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/opengl_render_node.cpp",
+          "lines": [
+            1024
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M26",
+      "scope": "simulation",
+      "title": "GPU渲染参数和反投影",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/include/opengl_sim.hpp",
+          "lines": [
+            1263
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M27",
+      "scope": "simulation",
+      "title": "GPU顶点着色器",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/include/360camera.vs",
+          "lines": [
+            75,
+            102
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M28",
+      "scope": "simulation",
+      "title": "GPU片元阶段",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/include/camera.fs",
+          "lines": [
+            14
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M29",
+      "scope": "simulation",
+      "title": "launch参数向CPU/GPU同时传递",
+      "implementation_status": "required_simulation_patch",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/simulator.xml",
+          "lines": [
+            27,
+            78,
+            83
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M30",
+      "scope": "both",
+      "title": "URDF与仿真机载遮挡",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/Utils/go2_description/urdf/go2_description.urdf",
+          "lines": [
+            748
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M31",
+      "scope": "navigation",
+      "title": "30cm踏面关键航点",
+      "implementation_status": "site_review",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+          "lines": [
+            378
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M32",
+      "scope": "navigation",
+      "title": "模式3支撑面高度",
+      "implementation_status": "implemented_adapter",
+      "locations": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+          "lines": [
+            374
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M33",
+      "scope": "navigation",
+      "title": "地图与地点版本",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "scripts/init_voice_map.py",
+          "lines": [
+            21
+          ]
+        }
+      ],
+      "source_located": true
+    },
+    {
+      "id": "M34",
+      "scope": "live",
+      "title": "机载SDK运行与动作资格",
+      "implementation_status": "site_required",
+      "locations": [
+        {
+          "repository": "bundle",
+          "path": "voice_agent/runtime_worker.py",
+          "lines": [
+            23
+          ]
+        }
+      ],
+      "source_located": true
+    }
+  ],
+  "errors": [],
+  "source_audit_passed": true,
+  "note": "Located anchors and original file hashes are not proof that a patch, ROS build, sensor measurement or robot task has passed."
+}

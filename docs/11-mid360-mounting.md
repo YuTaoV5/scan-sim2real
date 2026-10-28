@@ -91,3 +91,5 @@ MID360[官方规格](https://www.livoxtech.com/mid-360/specs)为水平360°、�
 - Elevator-LIO固定版本`1d79af77f3d9747ea57ef52a9b01d326a8ec561a`：`yaml/sensors/livox.yaml`、`yaml/runtime/mapping.yaml`、`src/node/publish.cpp`。
 
 这是一份源码审计与参数映射，不是实测安装标定，也未在实机验收。
+
+逐项实施状态、GPU shader/反投影等扩展检查，以及只读复核工具见 [12 完整修改点清单](12-complete-mounting-changes.md)。

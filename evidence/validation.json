@@ -10,7 +10,7 @@
   "synthetic_ros_fixture": "implemented_not_run",
   "offline_tests": {
     "status": "passed",
-    "count": 48,
+    "count": 54,
     "command": "python -m unittest discover -s tests -v"
   },
   "bundle_checks": "passed",
@@ -34,5 +34,14 @@
     "PyYAML": "6.0.3"
   },
   "source_fetch_all": "not_run_on_new_server",
-  "voice_evidence": "evidence/voice-validation.json"
+  "voice_evidence": "evidence/voice-validation.json",
+  "mounting_audit": {
+    "status": "source_identity_and_locations_passed",
+    "report": "evidence/mounting-source-audit.json",
+    "change_points": 34,
+    "source_files": 23,
+    "regression_tests": 6,
+    "simulation_patches_applied": false,
+    "physical_mounting_measured": false
+  }
 }

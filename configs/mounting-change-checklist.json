@@ -1,0 +1,517 @@
+{
+  "schema": 1,
+  "scope": "MID360 standard mount versus pinned SCAN/LIO assumptions; no measured calibration",
+  "real_mounting_values_known": false,
+  "changes": [
+    {
+      "id": "M01",
+      "scope": "live",
+      "implementation_status": "site_required",
+      "title": "机身与雷达原点/六自由度",
+      "action": "定义与MoE一致的B，填写实测T_base_lidar；不得按照片或标准产品名推算数值",
+      "verification": "原厂坐标基准、尺寸记录、旋转正交和独立地面/墙面检查",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "configs/calibration.template.json",
+          "anchor": "\"T_base_lidar\": null"
+        }
+      ]
+    },
+    {
+      "id": "M02",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "安装矩阵求逆",
+      "action": "prepare.py把T_B_L求逆写入lidar_R_body/lidar_t_body，覆盖LIO默认90度偏航和旧平移",
+      "verification": "带非零偏航/倾角/杆臂的矩阵逆与合成世界位姿回归",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "scripts/prepare.py",
+          "anchor": "lidar_body=np.linalg.inv(c['T_base_lidar'])"
+        }
+      ]
+    },
+    {
+      "id": "M03",
+      "scope": "live",
+      "implementation_status": "site_review",
+      "title": "MID360内部IMU外参",
+      "action": "整机换支架不修改T_I_L；确认使用内置IMU且驱动未预旋转",
+      "verification": "按原始IMU/点云轴和厂家坐标定义审阅",
+      "sources": [
+        {
+          "repository": "lio",
+          "path": "yaml/sensors/livox.yaml",
+          "anchor": "imu_R_lidar:"
+        }
+      ]
+    },
+    {
+      "id": "M04",
+      "scope": "live",
+      "implementation_status": "site_required",
+      "title": "驱动网络与唯一数据流",
+      "action": "现场填写host_net_info和lidar_configs.ip；停用会重复占雷达的原厂驱动",
+      "verification": "抓包/话题来源、雷达IMU时间戳与频率，不改SSH/SDK网卡",
+      "sources": [
+        {
+          "repository": "livox_driver",
+          "path": "config/MID360_config.json",
+          "anchor": "\"host_net_info\""
+        }
+      ]
+    },
+    {
+      "id": "M05",
+      "scope": "live",
+      "implementation_status": "site_review",
+      "title": "驱动不预变换原始点云",
+      "action": "extrinsic_parameter保持identity，安装变换由LIO/适配器负责",
+      "verification": "原始bag保存原坐标、确认没有第二处同角度补偿",
+      "sources": [
+        {
+          "repository": "livox_driver",
+          "path": "config/MID360_config.json",
+          "anchor": "\"extrinsic_parameter\""
+        }
+      ]
+    },
+    {
+      "id": "M06",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "CustomMsg类型适配",
+      "action": "driver2消息中继到lio/CustomMsg，保留逐点offset_time/tag/line",
+      "verification": "消息MD5、点数和时间保留；不换成丢失逐点时间的简化点云",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "scripts/livox_relay.py",
+          "anchor": "CustomMsg"
+        }
+      ]
+    },
+    {
+      "id": "M07",
+      "scope": "live",
+      "implementation_status": "site_review",
+      "title": "近场球形盲区",
+      "action": "复核mapping.yaml中blind=0.8，依据原始点云选择阈值",
+      "verification": "比较处理前后0.3m踏面/近边缘；不直接按物理0.1m极限设软件阈值",
+      "sources": [
+        {
+          "repository": "lio",
+          "path": "yaml/runtime/mapping.yaml",
+          "anchor": "blind: 0.8"
+        }
+      ]
+    },
+    {
+      "id": "M08",
+      "scope": "live",
+      "implementation_status": "site_required",
+      "title": "自身遮挡盒坐标与运动包络",
+      "action": "按实际T_B_L把机身/支架包络转到L系，拟合保守box_corner；启用盒子路径会替代球形blind",
+      "verification": "检查站立及运动数据，不误删脚前/腹下可通行踏面",
+      "sources": [
+        {
+          "repository": "lio",
+          "path": "yaml/runtime/mapping.yaml",
+          "anchor": "use_box_blind: false"
+        }
+      ]
+    },
+    {
+      "id": "M09",
+      "scope": "live",
+      "implementation_status": "site_review",
+      "title": "降采样保真",
+      "action": "复核filter_size、point_filter_num、自适应target_points/min_voxel/max_voxel，避免粗体素吞掉16cm台阶",
+      "verification": "对比原始/保留点云与台阶立面和边缘，记录负载下实际体素",
+      "sources": [
+        {
+          "repository": "lio",
+          "path": "yaml/runtime/mapping.yaml",
+          "anchor": "max_voxel: 0.8"
+        }
+      ]
+    },
+    {
+      "id": "M10",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "真实机身位姿链",
+      "action": "确认T_W_B=T_W_I*T_I_L*T_L_B，不能把MID360 IMU pose当机身pose",
+      "verification": "原地转身检查机身原点和墙面；机身朝向/速度方向与MoE一致",
+      "sources": [
+        {
+          "repository": "lio",
+          "path": "src/node/publish.cpp",
+          "anchor": "world_T_body = world_T_imu * imu_T_lidar * lidar_T_body"
+        }
+      ]
+    },
+    {
+      "id": "M11",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "LIO世界系点云",
+      "action": "锁定LIO已调用transLidar2World；不要依赖clouds_lidar这个话题名称猜frame",
+      "verification": "确认原始点和世界点不混用，位姿运动时静态墙保持静止",
+      "sources": [
+        {
+          "repository": "lio",
+          "path": "src/node/publish.cpp",
+          "anchor": "transLidar2World"
+        }
+      ]
+    },
+    {
+      "id": "M12",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "独立雷达位姿",
+      "action": "pose_adapter从T_W_I*T_I_L得到雷达原点，不能用body点代替光线原点",
+      "verification": "非零杆臂时平移和姿态均正确；机身/雷达/云共用世界原点",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "scripts/pose_adapter.py",
+          "anchor": "if index==1:matrix=matrix@c['T_imu_lidar']"
+        }
+      ]
+    },
+    {
+      "id": "M13",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "SCAN实机输入重映射",
+      "action": "使用body_pose/lidar_pose/cloud_world三路适配输出；不接仿真odom",
+      "verification": "确认话题类型、frame、时间与来源；运行时启动/重放时钟不混用",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "scripts/prepare.py",
+          "anchor": "/rob2nav/lidar_pose"
+        }
+      ]
+    },
+    {
+      "id": "M14",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "世界系云开关",
+      "action": "生成cloud_is_world=true，修正原run.launch的false分支",
+      "verification": "确认世界系云不再经sensor_r*point+ray_pos二次变换",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/run.launch",
+          "anchor": "'false' if arg('is_real_world')"
+        }
+      ]
+    },
+    {
+      "id": "M15",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "硬编码内部外参绕过",
+      "action": "雷达pose已是T_W_L时need_extrinsic=false；不把T_B_L塞入T_I_L位置",
+      "verification": "rosparam与传入pose语义一致；对比射线起点与LiDAR位置",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_env/src/grid_map.cpp",
+          "anchor": "mp_.lidar_extrinsic_ <<"
+        }
+      ]
+    },
+    {
+      "id": "M16",
+      "scope": "live",
+      "implementation_status": "conditional_upstream_patch",
+      "title": "直接body pose接SCAN的可选路线",
+      "action": "只有坚持传body pose才需参数化grid_map.h/cpp完整T_B_L；不自动从TF读取",
+      "verification": "矩阵方向/正交/单位校验、重新编译；不得与M12/M15重复施加",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_env/include/plan_env/grid_map.h",
+          "anchor": "Eigen::Matrix4d lidar_extrinsic_"
+        }
+      ]
+    },
+    {
+      "id": "M17",
+      "scope": "both",
+      "implementation_status": "site_required",
+      "title": "机身高度与世界原点",
+      "action": "initial_base_height_m量B离初始水平地面高度；body_height不能填LiDAR离地高度",
+      "verification": "地面/机身/雷达共同平移，跨高度路径只加减一次机身参考高度",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/advanced_param.xml",
+          "anchor": "grid_map/body_height"
+        }
+      ]
+    },
+    {
+      "id": "M18",
+      "scope": "both",
+      "implementation_status": "site_review",
+      "title": "双圆柱碰撞体与检查函数",
+      "action": "按实际支架/狗身运动包络审查radius/offset；头部或背部突出不能仅修外参",
+      "verification": "查看真实碰撞包络；必要时扩展几何模型而非只放宽距离阈值",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_env/include/plan_env/grid_map.h",
+          "anchor": "Eigen::Vector3d front = pos + mp_.double_cylinder_offset_ * heading"
+        }
+      ]
+    },
+    {
+      "id": "M19",
+      "scope": "both",
+      "implementation_status": "site_review",
+      "title": "垂直碰撞膨胀及显示一致性",
+      "action": "上下膨胀与实际机身/载荷匹配，核对FSM self_inflation Marker与算法",
+      "verification": "狭窄通道/横杆/平台处同时检查collision与Marker，不能只改可视化",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+          "anchor": "self_inflation_z_up_"
+        }
+      ]
+    },
+    {
+      "id": "M20",
+      "scope": "live",
+      "implementation_status": "implemented_adapter",
+      "title": "真实模式不发布仿真关节/位姿",
+      "action": "使用generated launch，不启动go2_gait_publisher和go2_kinematic_sim作为反馈",
+      "verification": "如需机器人模型显示，从实测关节发布joint_states；不把假步态当物理验证",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/run.launch",
+          "anchor": "name=\"go2_gait_publisher\""
+        }
+      ]
+    },
+    {
+      "id": "M21",
+      "scope": "live",
+      "implementation_status": "site_required",
+      "title": "TF和RViz",
+      "action": "校准页看livox_frame，导航页看nav_odom；核对唯一TF发布者与父子关系",
+      "verification": "原地旋转/平移时云与真实机器人一致；仅显示TF不能修改C++点坐标",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "configs/calibration.rviz",
+          "anchor": "Fixed Frame: livox_frame"
+        }
+      ]
+    },
+    {
+      "id": "M22",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "CPU发布的雷达安装变换",
+      "action": "publishLidarPose使用完整T_W_B*T_B_L，不仅叠加pitch且复用body位置",
+      "verification": "零/非零xyz与三轴旋转测试，发布位姿与渲染完全相同",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+          "anchor": "void publishLidarPose"
+        }
+      ]
+    },
+    {
+      "id": "M23",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "CPU射线与筛选原点",
+      "action": "将近邻查询、距离、方位/俯仰裁剪、输出点反变换一起改为真实LiDAR原点/姿态",
+      "verification": "非零杆臂时遮挡和墙面命中均正确；不能仅改odom发布",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+          "anchor": "const Eigen::Vector3d pos(odom_.pose.pose.position.x"
+        }
+      ]
+    },
+    {
+      "id": "M24",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "CPU非对称垂直视场",
+      "action": "所有俯仰裁剪、极坐标行号和反投影使用L系elevation_min/max，不只把90改59",
+      "verification": "L系-7与52度边界、360度方位和完整roll/pitch/yaw扫描边界",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/pointcloud_render_node.cpp",
+          "anchor": "vertical_fov_margined_ / 2.0"
+        }
+      ]
+    },
+    {
+      "id": "M25",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "GPU节点杆臂与近裁剪",
+      "action": "renderSensedPoints与publishLidarPose共用完整T_B_L；统一min_raylength与传给render的near值",
+      "verification": "CPU/GPU同地图同T_B_L对比；解决节点min_raylength与setParameters硬编码0.1差异",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/src/opengl_render_node.cpp",
+          "anchor": "yaw_fov, vertical_fov, 0.1, sensing_horizon"
+        }
+      ]
+    },
+    {
+      "id": "M26",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "GPU渲染参数和反投影",
+      "action": "opengl_sim.hpp的setParameters、uniform、投影行号及点云回读要携带非对称俯仰边界",
+      "verification": "图像尺寸/像素中心/高度偏置与CPU同约定，点云回读无额外旋转",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/include/opengl_sim.hpp",
+          "anchor": "float polar_res_rad = polar_res/180.0"
+        }
+      ]
+    },
+    {
+      "id": "M27",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "GPU顶点着色器",
+      "action": "360camera.vs将关于0对称的俯仰投影改为[min,max]偏置映射，边界丢弃与回读一致",
+      "verification": "上下边界、跨正负方位、近远范围和NaN/空图测试",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/include/360camera.vs",
+          "anchor": "360.0/fov.y"
+        }
+      ]
+    },
+    {
+      "id": "M28",
+      "scope": "simulation",
+      "implementation_status": "site_review",
+      "title": "GPU片元阶段",
+      "action": "camera.fs目前只透传颜色，若深度/有效性编码不变无需因换安装另改",
+      "verification": "不要仅在片元颜色中修倾角；先检查顶点和回读路径",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/local_sensing/include/camera.fs",
+          "anchor": "FragColor = vec4(ourColor, 1.0f)"
+        }
+      ]
+    },
+    {
+      "id": "M29",
+      "scope": "simulation",
+      "implementation_status": "required_simulation_patch",
+      "title": "launch参数向CPU/GPU同时传递",
+      "action": "simulator.xml为两个节点增加同一完整T_B_L、俯仰上下限及近裁剪参数，避免默认45/90/1m",
+      "verification": "切use_gpu不改变安装语义；实机模式不启动这些节点",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/launch/simulator.xml",
+          "anchor": "use_gpu"
+        }
+      ]
+    },
+    {
+      "id": "M30",
+      "scope": "both",
+      "implementation_status": "site_review",
+      "title": "URDF与仿真机载遮挡",
+      "action": "新增明确mid360_link/joint表示实测安装，不冒用原radar_joint；遮挡需实际几何而非仅可视mesh",
+      "verification": "比较模型光线/实机原始云，确认支架和狗身遮挡；不改MoE本体惯量来伪装修外参",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/simulator/Utils/go2_description/urdf/go2_description.urdf",
+          "anchor": "name=\"radar_joint\""
+        }
+      ]
+    },
+    {
+      "id": "M31",
+      "scope": "navigation",
+      "implementation_status": "site_review",
+      "title": "30cm踏面关键航点",
+      "action": "模式3抽稀min_dist=0.5可能删中间点；末点保留不能保护所有中间台阶；逐边桥接与整条路线分开验收",
+      "verification": "按当前分段终点/整条路径分别检查，保留楼梯入口、顶部、坡顶/坡底关键点",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+          "anchor": "constexpr double min_dist = 0.5"
+        }
+      ]
+    },
+    {
+      "id": "M32",
+      "scope": "navigation",
+      "implementation_status": "implemented_adapter",
+      "title": "模式3支撑面高度",
+      "action": "上游path z加body_height；语音桥从机身目标减一次高度后发布",
+      "verification": "每层z与机身高度分离；避免重复加高或将雷达高度当机身高度",
+      "sources": [
+        {
+          "repository": "scan",
+          "path": "src/planner/plan_manage/src/scan_replan_fsm.cpp",
+          "anchor": "msg->poses.back().pose.position.z + body_height_"
+        }
+      ]
+    },
+    {
+      "id": "M33",
+      "scope": "navigation",
+      "implementation_status": "site_required",
+      "title": "地图与地点版本",
+      "action": "原始bag不预旋转；更新外参后重新建图/校验配准并重新绑定地点图hash",
+      "verification": "地图重力对齐、T_navigation_map、frame和初始原点验证",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "scripts/init_voice_map.py",
+          "anchor": "pcd_sha256"
+        }
+      ]
+    },
+    {
+      "id": "M34",
+      "scope": "live",
+      "implementation_status": "site_required",
+      "title": "机载SDK运行与动作资格",
+      "action": "只启用已有硬件合格的MoE/技能，保持唯一writer、实时反馈和独立watchdog",
+      "verification": "低速平地、停止/失联验收，再按段验收16cm台阶及下坡；无数据不标通过",
+      "sources": [
+        {
+          "repository": "bundle",
+          "path": "voice_agent/runtime_worker.py",
+          "anchor": "from rob2nav.deployment.service import preflight"
+        }
+      ]
+    }
+  ]
+}
