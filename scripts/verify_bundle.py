@@ -12,9 +12,9 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     required=['README.md','AGENTS.md','LICENSE','THIRD_PARTY_NOTICES.md','locks/sources.json',
               'evidence/validation.json','evidence/source-access.json','configs/calibration.template.json','configs/mission.template.yaml',
-              'configs/calibration.rviz','docker/Dockerfile','.github/workflows/offline-checks.yml']
+              'configs/calibration.rviz','voice_agent/server.py','locks/voice-models.json','evidence/voice-validation.json','docker/Dockerfile','.github/workflows/offline-checks.yml']
     required += ['docs/'+n for n in ['00-handoff.md','01-new-server.md','02-calibration.md',
-                  '03-bag-pcd.md','04-lio-scan.md','05-moe.md','06-missions.md','07-sources.md','08-troubleshooting.md']]
+                  '03-bag-pcd.md','04-lio-scan.md','05-moe.md','06-missions.md','07-sources.md','08-troubleshooting.md','09-voice-control.md','10-server-acceptance.md']]
     for path in required:
         if not (ROOT/path).is_file():raise ValueError('Missing '+path)
     lock=json.loads((ROOT/'locks/sources.json').read_text())
@@ -35,7 +35,7 @@ def main():
     state=json.loads((ROOT/'evidence/validation.json').read_text())
     if state['real_data_available'] or state['hardware_tested'] or state['ros_runtime_tested']:
         raise ValueError('Update verifier when real evidence exists; current bundle has no runtime evidence')
-    files=[p for folder in ['scripts','tests','docs','references','configs','locks','evidence']
+    files=[p for folder in ['scripts','tests','docs','references','configs','locks','evidence','voice_agent']
            for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
     files += [ROOT/n for n in ['README.md','AGENTS.md','LICENSE','THIRD_PARTY_NOTICES.md']]
     secret_patterns=[r'-----BEGIN (?:OPENSSH |RSA |EC )?PRIVATE KEY-----',

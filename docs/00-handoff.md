@@ -46,3 +46,7 @@
 ## 每次交接写什么
 
 更新 evidence/validation.json，注明测试时间、主机架构、仓库提交、上游提交、实际命令、数据类型（synthetic/real）、结果和日志路径。未执行写 not_run；失败写 failed，不通过删日志伪装成功。仿真成绩不可外推实机。
+
+## 新增语音交接
+
+语音实现与部署入口见文档09/10；能力集成到 Rob2Nav 的 `codex/voice-agent-capabilities` 分支。当前已实现三维地点图与任务状态机、ROS桥和原运行时worker，但“实现”不代替ROS/实机验收。最新真实推理与测试范围见 evidence/voice-validation.json；此文件比上文旧的未完成清单更具体。多层地图自动切换与地形可达性仍未实现。

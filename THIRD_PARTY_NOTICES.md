@@ -17,3 +17,7 @@ scripts/imu_checks.py, calibration_check.py, accel_six_pose.py and their tests/c
 SCAN-Planner, Elevator-LIO, Livox SDK2/driver2, Rob2Nav and Unitree SDK2 Python are fetched at locks/sources.json commits into ignored sources/. Their licenses stay in those checkouts. Optional RoboGauge MoE weights are fetched via the pinned Rob2Nav checkout and verified by SHA256; the model and original source notices remain upstream. LI-Init, elevation_mapping_cupy and TravExplorer are references, not vendored dependencies or completed integrations.
 
 Official manuals are linked, not redistributed in full. This project has no affiliation or endorsement claim from Unitree, Livox or the upstream research authors.
+
+## 语音运行时与模型
+
+Sherpa ONNX/core 2.0.1 使用其原始发行许可；SenseVoice 与 Melo ONNX 模型来自 locks/voice-models.json 的作者发布资产及 Hugging Face 仓库，保留各自模型卡和许可。模型文件不提交。SGLang-Omni 仅为可选 HTTP 协议适配参考，没有复制其运行时源码。

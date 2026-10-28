@@ -10,7 +10,7 @@
   "synthetic_ros_fixture": "implemented_not_run",
   "offline_tests": {
     "status": "passed",
-    "count": 13,
+    "count": 48,
     "command": "python -m unittest discover -s tests -v"
   },
   "bundle_checks": "passed",
@@ -33,5 +33,6 @@
     "numpy": "2.4.2",
     "PyYAML": "6.0.3"
   },
-  "source_fetch_all": "not_run_on_new_server"
+  "source_fetch_all": "not_run_on_new_server",
+  "voice_evidence": "evidence/voice-validation.json"
 }

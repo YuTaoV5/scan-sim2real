@@ -45,3 +45,7 @@ python scripts/fetch_sources.py --with-rob2nav --with-unitree-sdk
 验证状态以 [evidence/validation.json](evidence/validation.json) 为准。CI 只验证离线代码和资料完整性，不能证明 ROS、RViz 或行走通过。
 
 本仓库代码使用 MIT 许可；上游项目与模型保留原许可，见 [来源说明](THIRD_PARTY_NOTICES.md)。
+
+## 语音与统一导航任务
+
+新增 [09 语音、地图与技能状态机](docs/09-voice-control.md) 和 [10 服务器部署与验收](docs/10-server-acceptance.md)。支持常驻 ASR/TTS、地图地点与别名、三维拓扑路线、ROS1 SCAN 桥及原 Rob2Nav 技能合同。`demo` 使用合成任务反馈；`live` 保留设备资格与唯一控制写入者，现场验证状态见 [语音证据](evidence/voice-validation.json)。
